@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ms.boardProject.repository.BoardDAO">
+    <insert id="insert">
+        insert into board (title, content, writer)
+        values (#{title}, #{content}, #{writer})
+    </insert>
+
+    <select id="getList" resultType="ms.boardProject.domain.BoardVO">
+        select * from board
+        order by bno desc
+    </select>
+
+    <select id="getDetail" resultType="ms.boardProject.domain.BoardVO">
+        select * from board
+        where bno = #{bno}
+    </select>
+
+    <update id="update">
+        update board
+        set title = #{title},
+            content = #{content}
+        where bno = #{bno}
+    </update>
+
+    <delete id="remove">
+        delete from board
+        where bno = #{bno}
+    </delete>
+
+    <select id="selectBno" resultType="int">
+        select max(bno) from board
+    </select>
+</mapper>
